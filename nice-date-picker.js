@@ -2,6 +2,25 @@
  * nice date picker
  * Created by ollie on 2017/4/27.
  */
+
+function ndp_open() {
+
+    var source = event.target || event.srcElement;
+    var topPx = source.offsetHeight + source.offsetTop + 2;
+    var d = document.getElementById("ndp_onclk_c");
+    if (!d) { d = document.createElement("div"); d.id = "ndp_onclk_c"; }
+    d.style = "position:absolute;top:" + topPx + "px;left:" + source.offsetLeft + "px;";
+
+    new ndp({
+        dom: d,
+        onClickDate: function (date) {
+            source.value = date;
+            d.parentNode.removeChild(d);
+        }
+    });
+    document.body.appendChild(d);
+}
+
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
         typeof define === 'function' && define.amd ? define(factory) :
